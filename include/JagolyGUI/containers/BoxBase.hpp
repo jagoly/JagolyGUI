@@ -21,7 +21,6 @@ public:
 
 protected:
     std::vector<WidgetPtr> children;
-    Vec2U minWithExtra = {0u, 0u};
 
 private:
     Widget* do_get(ulong _handle) override;

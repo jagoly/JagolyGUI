@@ -12,7 +12,7 @@ public:
 
     void update_layout_positions() override;
 
-    template<class Type> Type* set_child(Type* _child);
+    template<class Type> Type* set(Type* _child);
 
     Vec2U margin = {8u, 8u};
 };
@@ -21,7 +21,7 @@ public:
 // Method Definitions /////
 
 template<class Type> inline
-Type* Frame::set_child(Type* _child) {
+Type* Frame::set(Type* _child) {
     static_assert(std::is_base_of<Widget, Type>::value, "");
     _child->parent = this; child.reset(_child); return _child;
 }

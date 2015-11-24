@@ -20,4 +20,7 @@ public:
     void propogate_func(std::function<void(Widget*)> _func);
 };
 
+template<class T> using if_Container = typename
+std::enable_if<std::is_base_of<Container, T>::value>::type;
+
 }

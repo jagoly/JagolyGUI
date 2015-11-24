@@ -29,4 +29,7 @@ public:
 using WidgetPtr = std::unique_ptr<Widget>;
 using WidgetFunc = std::function<void(Widget*)>;
 
+template<class T> using if_Widget = typename
+std::enable_if<std::is_base_of<Widget, T>::value>::type;
+
 }

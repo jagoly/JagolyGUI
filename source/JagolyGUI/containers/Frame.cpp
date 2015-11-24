@@ -39,7 +39,15 @@ void Frame::update_layout_expanding() {
 void Frame::update_layout_positions() {
     if (child.get() == nullptr) return;
 
-    child->calculatedPos = calculatedPos + Vec2I(margin.x, margin.y);
+    if (child->alignModeH == AlignMode::Positive)
+        child->calculatedPos.x = calculatedPos.x + calculatedSize.x - child->calculatedSize.x - margin.x;
+    else if (child->alignModeH == AlignMode::Negative) child->calculatedPos.x = calculatedPos.x + margin.x;
+    else child->calculatedPos.x = calculatedPos.x + calculatedSize.x / 2u - child->calculatedSize.x / 2u;
+
+    if (child->alignModeV == AlignMode::Positive)
+        child->calculatedPos.y = calculatedPos.y + calculatedSize.y - child->calculatedSize.y - margin.y;
+    else if (child->alignModeV == AlignMode::Negative) child->calculatedPos.y = calculatedPos.y + margin.y;
+    else child->calculatedPos.y = calculatedPos.y + calculatedSize.y / 2u - child->calculatedSize.y / 2u;
 
     if (auto container = dynamic_cast<Container*>(child.get()))
         container->update_layout_positions();

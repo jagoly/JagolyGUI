@@ -11,7 +11,7 @@ public:
 
     template<class Type = Widget> Type* pop(const std::string& _name);
 
-    void erase(const std::string& _name);
+    void erase(const std::string& _name) { do_erase(hash(_name)); }
 
 protected:
     virtual Widget* do_get(ulong _handle) = 0;
@@ -32,10 +32,6 @@ template<class Type> inline
 Type* ChildMulti::pop(const std::string& _name) {
     static_assert(std::is_base_of<Widget, Type>::value, "");
     return &dynamic_cast<Type&>(*do_pop(hash(_name)));
-}
-
-inline void ChildMulti::erase(const std::string& _name) {
-    do_erase(hash(_name));
 }
 
 }
